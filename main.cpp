@@ -10,16 +10,17 @@ using namespace std;
 // acualizar la coodenada
 // y finalmente volver a dibujar
 
-void dibujar(int x, int y){
+void dibujar(int x, int y, int z){
 	
-	putchxy(x,y,'x');
+	putchxy(x,y,z);
 	
 }
 	
+		
 	void borrar(int x, int y){
 		
 		// probar comentar
-		putchxy(x,y,' ');
+		putchxy(x,y, ' ');
 		
 	}
 		
@@ -29,13 +30,35 @@ void dibujar(int x, int y){
 			
 			int x=60;
 			int y=36;
+			int rana = 'x';
+			putchxy(x,y,rana); 
 			
-			putchxy(x,y,'X'); 
+			int vx = 12;
+			int vy = 28;
+			int coche = 'y';
+			putchxy(vx,vy,coche);
+			
+			
+			int tiempo = clock();
+			int velocidad =60;
+			int paso =	10000/velocidad;
+			
+			
 			
 			
 			
 			while(true){
 				
+				if((paso + tiempo) < clock()){
+					if(vx == 96){
+						vx = 12;
+					};
+					
+					putchxy(vx,vy, ' ');
+					vx = vx + 4;
+					putchxy(vx,vy,coche);
+					tiempo = clock();
+				};
 				
 				if(kbhit()) { 
 					int tecla=getch();
@@ -47,7 +70,7 @@ void dibujar(int x, int y){
 						if(x > 12){
 							borrar(x,y); 
 							x = x - 10;
-							dibujar(x,y);	
+							dibujar(x,y,rana);	
 						};
 						
 						
@@ -55,9 +78,9 @@ void dibujar(int x, int y){
 					case 77: //derecha
 						
 						if(x < 96){
-							borrar(x,y); 
-							x = x + 10;
-							dibujar(x,y); 
+						borrar(x,y); 
+						x = x + 10;
+						dibujar(x,y,rana); 
 						};
 						
 						
@@ -66,21 +89,21 @@ void dibujar(int x, int y){
 						
 						borrar(x,y); 
 						y = y - 8;
-						dibujar(x,y);
+						dibujar(x,y,rana);
 						
 						
 						if(y == 12){
 							borrar(x,y); 
 							y = 36;
-							dibujar(x,y);
+							dibujar(x,y,rana);
 						};
 						
 						break;
 					case 80: //abajo
 						if(y < 36){
-							borrar(x,y); 
-							y = y + 8;
-							dibujar(x,y);
+						borrar(x,y); 
+						y = y + 8;
+						dibujar(x,y,rana);
 						};
 						
 						break;
@@ -88,11 +111,13 @@ void dibujar(int x, int y){
 						return 1;
 					}
 					
-					putchxy(x,y,'X');
-					
+										
 				}
 				
 			}
+			
+				
+					
+						
 			return 0;
 		}
-		
